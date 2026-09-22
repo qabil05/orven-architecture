@@ -393,7 +393,15 @@ function ContactBlock() {
 }
 
 function Footer() {
-  return <footer><strong>ORVEN</strong><span>ARCHITECTURE / INTERIORS</span><span>BAKU — BARCELONA</span><span>© 2026</span></footer>;
+  return (
+    <footer>
+      <strong>ORVEN</strong>
+      <span>ARCHITECTURE / INTERIORS</span>
+      <span>BAKU — BARCELONA</span>
+      <span>© 2026</span>
+      <span className="template-note">CONCEPT WEBSITE — CREATED AS A DESIGN TEMPLATE. ORVEN IS A FICTIONAL STUDIO.</span>
+    </footer>
+  );
 }
 
 function Home() {

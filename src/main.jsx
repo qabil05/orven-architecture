@@ -192,6 +192,16 @@ function Reveal({ children, className = "" }) {
   return <div data-reveal className={"reveal " + className}>{children}</div>;
 }
 
+function MixedProjectTitle({ title }) {
+  const [first, ...rest] = title.split(" ");
+  return (
+    <>
+      <span>{first}</span>
+      {rest.length > 0 && <em>{rest.join(" ").toLowerCase()}</em>}
+    </>
+  );
+}
+
 function ProjectAtlas() {
   const [active, setActive] = useState(projects[0]);
   const [mode, setMode] = useState("index");
@@ -199,7 +209,17 @@ function ProjectAtlas() {
     <section className="atlas section-pad" id="projects">
       <div className="section-kicker"><span>02</span><span>SELECTED WORKS / 2025—2026</span></div>
       <div className="atlas-head">
-        <Reveal className="clip-title"><h2>SELECTED<br/>WORKS</h2></Reveal>
+        <div className="atlas-title-wrap">
+          <span className="section-watermark">02</span>
+          <Reveal className="clip-title">
+            <h2 className="mixed-title"><span>SELECTED</span><em>Works</em></h2>
+          </Reveal>
+          <div className="technical-strip">
+            <span>A—02 / ARCHIVE</span>
+            <span>05 PROJECTS</span>
+            <span>SCALE 1:100</span>
+          </div>
+        </div>
         <div className="mode-switch" role="group" aria-label="Project view">
           <button className={mode === "grid" ? "active" : ""} onClick={() => setMode("grid")}>GRID</button>
           <span>/</span>
@@ -266,7 +286,11 @@ function FeaturedCaseStudy() {
     <section className="featured section-pad">
       <div className="featured-info">
         <div className="section-kicker"><span>03</span><span>FEATURED CASE STUDY</span></div>
-        <h3>{p.title}</h3>
+        <div className="featured-title">
+          <span className="featured-ghost">01</span>
+          <h3><MixedProjectTitle title={p.title} /></h3>
+          <span className="featured-coord">40.4093° N / 49.8671° E</span>
+        </div>
         <p>{p.city}, {p.country}<br/>{p.status}<br/>{p.area}<br/>{p.year}</p>
         <div className="sequence-labels">
           {labels.map((l,i)=><span className={active===i?"active":""} key={l}>{String(i+1).padStart(2,"0")} {l}</span>)}
@@ -289,6 +313,7 @@ function MaterialStudy() {
   const [active, setActive] = useState(0);
   return (
     <section className="materials section-pad">
+      <span className="vertical-tag">MATERIAL / 05</span>
       <div className="section-kicker"><span>05</span><span>MATERIAL STUDY</span></div>
       <div className="materials-layout">
         <div className="materials-list">
@@ -319,6 +344,7 @@ function ProcessBlock() {
   ];
   return (
     <section className="process-block section-pad">
+      <div className="process-ruler" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
       <div className="section-kicker"><span>06</span><span>METHOD / PROCESS</span></div>
       <div className="process-layout">
         <div className="process-list">
@@ -343,7 +369,17 @@ function ContactBlock() {
   return (
     <section className="contact-block section-pad" id="contact">
       <div className="section-kicker"><span>08</span><span>NEW PROJECTS / 2026</span></div>
-      <Reveal className="clip-title"><h2>LET’S BUILD<br/>SOMETHING<br/>THAT BELONGS.</h2></Reveal>
+      <div className="contact-title-wrap">
+        <span className="contact-ghost" aria-hidden="true">FORM</span>
+        <Reveal className="clip-title">
+          <h2 className="mixed-title contact-title">
+            <span>LET’S</span><em>build</em>
+            <span>SOMETHING</span>
+            <span>THAT</span><em>belongs.</em>
+          </h2>
+        </Reveal>
+        <div className="contact-coordinates"><span>40°24'N</span><span>NEW COMMISSIONS / 2026</span></div>
+      </div>
       <form onSubmit={e=>e.preventDefault()} className="contact-form">
         <label>NAME<input type="text" placeholder="Your name" /></label>
         <label>EMAIL<input type="email" placeholder="name@email.com" /></label>
@@ -376,16 +412,34 @@ function Home() {
             </div>
             <div className="scroll-mark">SCROLL <span>↓</span> / 01</div>
           </div>
-          <div className="hero-image"><img src={projects[0].hero} alt="ORVEN architecture" /></div>
+          <div className="hero-image">
+            <span className="image-coordinate">A—01 / 40.4093°N</span>
+            <span className="image-scale">SECTION / 1:50</span>
+            <span className="image-crosshair" aria-hidden="true"></span>
+            <img src={projects[0].hero} alt="ORVEN architecture" />
+          </div>
         </section>
 
         <ProjectAtlas />
         <FeaturedCaseStudy />
 
         <section className="manifesto">
-          <div className="section-kicker light"><span>04</span><span>POSITION</span></div>
-          <Reveal className="clip-title"><h2>WE DO NOT<br/>DECORATE SPACE.</h2></Reveal>
-          <Reveal className="clip-title second"><h2>WE DEFINE<br/>HOW IT IS FELT.</h2></Reveal>
+          <div className="manifesto-grid" aria-hidden="true"></div>
+          <span className="manifesto-outline" aria-hidden="true">SPACE</span>
+          <div className="section-kicker light"><span>04</span><span>POSITION / A—A</span></div>
+          <div className="manifesto-top">
+            <Reveal className="clip-title">
+              <h2 className="mixed-title manifesto-title"><span>WE DO NOT</span><em>decorate</em><span>SPACE.</span></h2>
+            </Reveal>
+            <div className="manifesto-index">
+              <span>01 <b>LIGHT</b></span>
+              <span>02 <b>MATERIAL</b></span>
+              <span>03 <b>PROPORTION</b></span>
+            </div>
+          </div>
+          <Reveal className="clip-title second">
+            <h2 className="mixed-title manifesto-title lower"><span>WE DEFINE</span><em>how it is felt.</em></h2>
+          </Reveal>
           <p>Architecture begins where proportion, material and light become inseparable.</p>
         </section>
 
@@ -421,7 +475,7 @@ function ProjectArchive() {
       <main className="subpage">
         <section className="archive-intro section-pad">
           <div className="section-kicker"><span>A</span><span>ARCHIVE / 2022—2026</span></div>
-          <Reveal className="clip-title"><h1>PROJECTS</h1></Reveal>
+          <Reveal className="clip-title"><h1 className="mixed-title page-title"><span>PROJECT</span><em>archive</em></h1></Reveal>
           <p>Five studies in context, climate, permanence and material.</p>
           <div className="filters">{["ALL","RESIDENTIAL","INTERIORS","CULTURAL"].map(f=><button className={filter===f?"active":""} onClick={()=>setFilter(f)} key={f}>{f}</button>)}</div>
         </section>
@@ -449,7 +503,7 @@ function ProjectPage({ project }) {
           <div className="project-hero-image"><img src={project.hero} alt={project.title}/></div>
           <div className="project-hero-copy">
             <span>{project.number} / {project.type.toUpperCase()}</span>
-            <h1>{project.title}</h1>
+            <h1 className="project-display"><MixedProjectTitle title={project.title} /></h1>
             <div><span>{project.city}, {project.country}</span><span>{project.year}</span></div>
           </div>
         </section>
@@ -516,7 +570,7 @@ function StudioPage() {
     <main className="subpage studio-page">
       <section className="studio-hero section-pad">
         <div className="section-kicker"><span>S</span><span>STUDIO / ORVEN</span></div>
-        <Reveal className="clip-title"><h1>WE BUILD<br/>FROM THE<br/>INSIDE OUT.</h1></Reveal>
+        <Reveal className="clip-title"><h1 className="mixed-title page-title studio-title"><span>WE BUILD</span><em>from the</em><span>INSIDE OUT.</span></h1></Reveal>
         <p>ORVEN works across architecture and interiors, treating material, movement and natural light as one continuous problem.</p>
       </section>
       <section className="full-image reveal" data-reveal><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=88" alt="Studio"/></section>
@@ -537,7 +591,7 @@ function ProcessPage() {
     <main className="subpage">
       <section className="archive-intro section-pad">
         <div className="section-kicker"><span>P</span><span>PROCESS</span></div>
-        <Reveal className="clip-title"><h1>FROM SITE<br/>TO DETAIL.</h1></Reveal>
+        <Reveal className="clip-title"><h1 className="mixed-title page-title"><span>FROM SITE</span><em>to detail.</em></h1></Reveal>
         <p>Four phases. One continuous architectural argument.</p>
       </section>
       <ProcessBlock/>

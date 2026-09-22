@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&display=swap');
 
 :root{
   --ivory:#e9e5dc;
@@ -188,6 +188,239 @@ footer strong{letter-spacing:.18em}footer span{font:400 9px IBM Plex Mono,monosp
 .studio-manifesto{display:grid;grid-template-columns:2fr 1fr;gap:60px}.studio-manifesto>p{font-size:clamp(38px,5vw,74px);line-height:1.03;letter-spacing:-.055em;margin:0}.stats.large{grid-template-columns:1fr 1fr;align-self:end}
 .contact-aside{border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);font:400 10px IBM Plex Mono,monospace}
 
+
+/* =========================
+   ORVEN V2 — editorial sharpen
+   ========================= */
+.mixed-title{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:0;
+  position:relative;
+}
+.mixed-title span{
+  display:block;
+  font-family:Manrope,Arial,sans-serif;
+  font-style:normal;
+  text-transform:uppercase;
+}
+.mixed-title em{
+  display:block;
+  font-family:"Instrument Serif",Georgia,serif;
+  font-weight:400;
+  font-style:italic;
+  text-transform:none;
+  letter-spacing:-.045em;
+}
+.atlas-title-wrap{position:relative;min-width:min(760px,70vw)}
+.atlas-title-wrap .section-watermark{
+  position:absolute;
+  right:2%;
+  top:-34px;
+  font:400 clamp(96px,14vw,220px)/.8 "Instrument Serif",serif;
+  font-style:italic;
+  color:rgba(169,88,63,.13);
+  pointer-events:none;
+  transform:rotate(-4deg)
+}
+.atlas .mixed-title{font-size:clamp(70px,10vw,172px);line-height:.76;letter-spacing:-.075em}
+.atlas .mixed-title em{
+  margin-left:1.2ch;
+  margin-top:-.08em;
+  font-size:.88em;
+  color:var(--clay)
+}
+.technical-strip{
+  margin-top:28px;
+  padding-top:10px;
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:28px;
+  font:500 9px IBM Plex Mono,monospace;
+  letter-spacing:.05em;
+  position:relative
+}
+.technical-strip:before{
+  content:"";
+  position:absolute;
+  left:0;top:-1px;width:13%;height:1px;background:var(--clay);
+  animation:technicalSweep 6s var(--ease) infinite alternate
+}
+@keyframes technicalSweep{to{transform:translateX(420%)}}
+
+.hero-image .image-coordinate,.hero-image .image-scale{
+  position:absolute;z-index:3;
+  font:500 8px IBM Plex Mono,monospace;
+  letter-spacing:.06em;
+  background:rgba(233,229,220,.88);
+  padding:7px 9px
+}
+.hero-image .image-coordinate{left:14px;top:14px}
+.hero-image .image-scale{right:14px;bottom:14px}
+.image-crosshair{
+  position:absolute;z-index:3;left:50%;top:50%;
+  width:24px;height:24px;transform:translate(-50%,-50%);
+  opacity:.45;pointer-events:none
+}
+.image-crosshair:before,.image-crosshair:after{
+  content:"";position:absolute;background:#f1eee6
+}
+.image-crosshair:before{left:50%;top:0;width:1px;height:100%}
+.image-crosshair:after{left:0;top:50%;width:100%;height:1px}
+
+.project-row{position:relative;overflow:hidden}
+.project-row:after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:var(--clay);transition:width .45s var(--ease)
+}
+.project-row:hover:after,.project-row.active:after{width:100%}
+.project-row strong{transition:transform .35s var(--ease),font-style .35s var(--ease)}
+.project-row:hover strong,.project-row.active strong{transform:translateX(7px)}
+
+.featured-title{position:relative;margin:8vh 0 26px;padding-top:18px}
+.featured-info .featured-title h3{
+  position:relative;z-index:2;
+  margin:0;max-width:none;
+  font-size:clamp(56px,6.3vw,104px);line-height:.76;letter-spacing:-.06em;
+  display:flex;flex-direction:column
+}
+.featured-title h3 span{font-style:normal}
+.featured-title h3 em{
+  font-family:"Instrument Serif",Georgia,serif;
+  font-weight:400;font-style:italic;text-transform:none;
+  color:var(--clay);margin-left:.8ch;letter-spacing:-.04em
+}
+.featured-ghost{
+  position:absolute;right:4%;top:-12%;
+  font:400 clamp(110px,12vw,190px)/.8 "Instrument Serif",serif;
+  font-style:italic;color:rgba(169,88,63,.11)
+}
+.featured-coord{
+  display:block;margin-top:18px;
+  font:500 8px IBM Plex Mono,monospace;letter-spacing:.06em;
+  opacity:.55
+}
+
+.manifesto{position:relative;overflow:hidden;isolation:isolate}
+.manifesto-grid{
+  position:absolute;inset:0;z-index:-1;opacity:.16;
+  background-image:
+    linear-gradient(rgba(241,238,230,.28) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(241,238,230,.28) 1px,transparent 1px);
+  background-size:8.333vw 8.333vw;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent 90%)
+}
+.manifesto-outline{
+  position:absolute;right:-.02em;top:18vh;z-index:-1;
+  font:400 clamp(150px,25vw,440px)/.75 Manrope,sans-serif;
+  letter-spacing:-.085em;color:transparent;
+  -webkit-text-stroke:1px rgba(241,238,230,.10);
+  transform:rotate(-90deg) translateX(22%);
+  transform-origin:100% 0;
+  pointer-events:none
+}
+.manifesto-top{
+  display:grid;grid-template-columns:minmax(0,2fr) minmax(180px,.55fr);
+  gap:8vw;align-items:end
+}
+.manifesto-title{font-size:clamp(72px,10vw,168px)!important;line-height:.75!important}
+.manifesto-title em{font-size:.75em;color:#cf846d;margin-left:1.6ch;margin-top:-.04em}
+.manifesto-title span:last-child{margin-left:.45ch}
+.manifesto-index{
+  display:grid;gap:13px;padding-bottom:1.2em;
+  font:400 9px IBM Plex Mono,monospace;border-top:1px solid rgba(241,238,230,.28);
+  padding-top:12px
+}
+.manifesto-index span{display:grid;grid-template-columns:30px 1fr;opacity:.72}
+.manifesto-index b{font:500 9px IBM Plex Mono,monospace}
+.manifesto .second{position:relative;z-index:2}
+.manifesto-title.lower em{font-size:.72em;color:#f1eee6;margin-left:1.1ch}
+.manifesto:after{
+  content:"A—A / 1:100";
+  position:absolute;right:28px;bottom:26px;
+  font:500 8px IBM Plex Mono,monospace;letter-spacing:.06em;opacity:.34
+}
+
+.materials{position:relative;overflow:hidden}
+.vertical-tag{
+  position:absolute;right:11px;top:50%;
+  writing-mode:vertical-rl;transform:translateY(-50%) rotate(180deg);
+  font:500 8px IBM Plex Mono,monospace;letter-spacing:.16em;
+  opacity:.42
+}
+.materials-list button{position:relative}
+.materials-list button:after{
+  content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--clay);
+  transition:width .45s var(--ease)
+}
+.materials-list button.active:after{width:100%}
+.materials-list button.active strong{font-family:"Instrument Serif",Georgia,serif;font-style:italic;text-transform:none;font-size:clamp(30px,3.35vw,52px)}
+
+.process-block{position:relative}
+.process-ruler{
+  position:absolute;left:28px;right:28px;top:79px;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  font:400 7px IBM Plex Mono,monospace;opacity:.28;
+  border-top:1px solid var(--line);padding-top:5px
+}
+.process-ruler span:not(:first-child){text-align:center}
+.process-ruler span:last-child{text-align:right}
+.process-list button{position:relative;transition:padding-left .35s var(--ease)}
+.process-list button:before{
+  content:"";position:absolute;left:0;top:50%;width:0;height:1px;background:var(--clay);
+  transition:width .35s var(--ease)
+}
+.process-list button.active{padding-left:18px}
+.process-list button.active:before{width:11px}
+
+.contact-title-wrap{position:relative;overflow:hidden;padding-top:18px}
+.contact-ghost{
+  position:absolute;right:-.03em;top:.02em;
+  font:400 clamp(160px,27vw,460px)/.8 "Instrument Serif",serif;
+  font-style:italic;color:rgba(169,88,63,.09);
+  pointer-events:none
+}
+.contact-title{font-size:clamp(70px,10vw,164px)!important;line-height:.75!important;max-width:none!important}
+.contact-title em{font-size:.72em;color:var(--clay);margin-left:1.2ch;margin-top:-.12em}
+.contact-title span:nth-of-type(2){margin-top:.08em}
+.contact-title span:nth-of-type(3){margin-left:1.1ch}
+.contact-title em:last-child{margin-left:2.6ch;color:var(--carbon)}
+.contact-coordinates{
+  margin-top:28px;border-top:1px solid var(--line);padding-top:9px;
+  display:flex;justify-content:space-between;
+  font:500 8px IBM Plex Mono,monospace;letter-spacing:.05em
+}
+.contact-form label{position:relative}
+.contact-form label:after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--clay);
+  transition:width .35s var(--ease)
+}
+.contact-form label:focus-within:after{width:100%}
+
+.page-title{font-size:clamp(84px,14vw,230px)!important;line-height:.72!important}
+.page-title em{font-size:.58em;color:var(--clay);margin-left:1.25ch;margin-top:-.06em}
+.studio-title em{margin-left:2.25ch}
+.studio-title span:last-child{margin-left:.55ch}
+
+.project-display{display:flex!important;flex-direction:column;max-width:none!important}
+.project-display span{font-family:Manrope,sans-serif}
+.project-display em{
+  font-family:"Instrument Serif",Georgia,serif;
+  font-weight:400;font-style:italic;text-transform:none;
+  color:#e3a08a;margin-left:.65ch;font-size:.75em;letter-spacing:-.04em
+}
+
+.image-shell{position:relative}
+.image-shell:after{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:rgba(233,229,220,.45);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .7s var(--ease)
+}
+.image-shell:hover:after{transform:scaleX(1)}
+
 @media(max-width:900px){
   .site-header{height:58px;padding:0 16px}
   .menu-toggle{display:block}
@@ -232,6 +465,43 @@ footer strong{letter-spacing:.18em}footer span{font:400 9px IBM Plex Mono,monosp
   .stats{grid-template-columns:1fr 1fr}
   .facts-grid{grid-template-columns:1fr 1fr}
 }
+
+@media(max-width:900px){
+  .atlas-title-wrap{min-width:0}
+  .atlas-title-wrap .section-watermark{right:0;top:-10px;font-size:34vw}
+  .atlas .mixed-title{font-size:17vw}
+  .atlas .mixed-title em{margin-left:.65ch}
+  .technical-strip{grid-template-columns:1fr auto}.technical-strip span:last-child{display:none}
+  .hero-image .image-coordinate,.hero-image .image-scale{font-size:7px;padding:6px 7px}
+  .featured-title{margin:28px 0 20px}
+  .featured-info .featured-title h3{font-size:18vw}
+  .featured-title h3 em{margin-left:.55ch}
+  .featured-ghost{font-size:32vw;right:2%;top:-14%}
+  .manifesto-top{grid-template-columns:1fr}
+  .manifesto-index{grid-template-columns:repeat(3,1fr);gap:8px;padding-bottom:0}
+  .manifesto-index span{display:flex;gap:6px}
+  .manifesto-title{font-size:17vw!important}
+  .manifesto-title em{margin-left:.5ch}
+  .manifesto-outline{font-size:55vw;right:-.08em;top:30vh}
+  .vertical-tag{display:none}
+  .process-ruler{left:16px;right:16px;top:57px}
+  .contact-title{font-size:16.5vw!important}
+  .contact-title em{margin-left:.65ch}
+  .contact-title span:nth-of-type(3){margin-left:.35ch}
+  .contact-title em:last-child{margin-left:1.1ch}
+  .page-title{font-size:21vw!important}
+  .page-title em{margin-left:.55ch}
+  .studio-title em{margin-left:1.1ch}
+  .project-display em{margin-left:.35ch}
+}
+@media(max-width:520px){
+  .technical-strip{font-size:7px;gap:10px}
+  .manifesto-index{display:none}
+  .manifesto-title em{font-size:.78em}
+  .contact-coordinates{font-size:7px}
+  .process-ruler{display:none}
+}
+
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
   .reveal{opacity:1!important;transform:none!important}

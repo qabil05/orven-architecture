@@ -142,8 +142,9 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:var(--carbon)}
 .submit{justify-self:start;margin-top:10px;font:500 11px IBM Plex Mono,monospace;border-bottom:1px solid var(--carbon);padding:10px 0 6px}
 .submit span{display:inline-block;margin-left:12px;transition:transform .2s}.submit:hover span{transform:translateX(6px)}
-footer{min-height:140px;border-top:1px solid var(--line);padding:28px;display:grid;grid-template-columns:1fr 1fr 1fr auto;align-items:end;gap:20px}
+footer{min-height:170px;border-top:1px solid var(--line);padding:28px;display:grid;grid-template-columns:1fr 1fr 1fr auto;align-items:end;gap:20px}
 footer strong{letter-spacing:.18em}footer span{font:400 9px IBM Plex Mono,monospace}
+.template-note{grid-column:1/-1;margin-top:18px;padding-top:12px;border-top:1px solid var(--line);opacity:.48;letter-spacing:.04em}
 
 .subpage{padding-top:68px}
 .archive-intro{min-height:72vh;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto;align-items:end}
@@ -442,7 +443,7 @@ footer strong{letter-spacing:.18em}footer span{font:400 9px IBM Plex Mono,monosp
   .process-visual{position:relative;top:auto;height:54vh;order:-1}.process-list button{grid-template-columns:42px 1fr}
   .studio-grid{gap:40px}.stats{grid-template-columns:1fr 1fr;gap:18px}
   .contact-form{grid-template-columns:1fr}.contact-form .full{grid-column:1}.contact-block{padding-top:100px}
-  footer{grid-template-columns:1fr 1fr;padding:22px 16px;min-height:160px}
+  footer{grid-template-columns:1fr 1fr;padding:22px 16px;min-height:190px}.template-note{grid-column:1/-1}
   .archive-intro{grid-template-columns:1fr;min-height:64vh}.archive-intro>p{margin-top:30px}.archive-intro h1,.studio-hero h1{font-size:22vw}
   .filters{overflow:auto;white-space:nowrap}
   .archive-grid{display:block;padding-top:0}.archive-card{display:block!important;margin:0 0 66px!important}.archive-meta{grid-template-columns:34px 1fr auto}.archive-meta span:nth-of-type(2){display:none}

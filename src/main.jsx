@@ -289,7 +289,7 @@ function FeaturedCaseStudy() {
         <div className="featured-title">
           <span className="featured-ghost">01</span>
           <h3><MixedProjectTitle title={p.title} /></h3>
-          <span className="featured-coord">40.4093° N / 49.8671° E</span>
+          <span className="featured-coord">GRID A—03 / ELEV. +0.00</span>
         </div>
         <p>{p.city}, {p.country}<br/>{p.status}<br/>{p.area}<br/>{p.year}</p>
         <div className="sequence-labels">
@@ -378,7 +378,7 @@ function ContactBlock() {
             <span>THAT</span><em>belongs.</em>
           </h2>
         </Reveal>
-        <div className="contact-coordinates"><span>40°24'N</span><span>NEW COMMISSIONS / 2026</span></div>
+        <div className="contact-coordinates"><span>REF / ORV-26</span><span>NEW COMMISSIONS / 2026</span></div>
       </div>
       <form onSubmit={e=>e.preventDefault()} className="contact-form">
         <label>NAME<input type="text" placeholder="Your name" /></label>
@@ -397,7 +397,7 @@ function Footer() {
     <footer>
       <strong>ORVEN</strong>
       <span>ARCHITECTURE / INTERIORS</span>
-      <span>BAKU — BARCELONA</span>
+      <span>INDEPENDENT DESIGN STUDIO</span>
       <span>© 2026</span>
       <span className="template-note">CONCEPT WEBSITE — CREATED AS A DESIGN TEMPLATE. ORVEN IS A FICTIONAL STUDIO.</span>
     </footer>
@@ -416,12 +416,12 @@ function Home() {
             <h1>ORVEN</h1>
             <div className="hero-statement">
               <p>Formed by place.<br/>Defined by proportion.</p>
-              <span>BAKU — BARCELONA</span>
+              <span>INDEPENDENT PRACTICE</span>
             </div>
             <div className="scroll-mark">SCROLL <span>↓</span> / 01</div>
           </div>
           <div className="hero-image">
-            <span className="image-coordinate">A—01 / 40.4093°N</span>
+            <span className="image-coordinate">A—01 / GRID 04—07</span>
             <span className="image-scale">SECTION / 1:50</span>
             <span className="image-crosshair" aria-hidden="true"></span>
             <img src={projects[0].hero} alt="ORVEN architecture" />
@@ -615,7 +615,7 @@ function ContactPage() {
     <Header/>
     <main className="subpage">
       <ContactBlock/>
-      <section className="contact-aside section-pad"><span>BAKU / AZ</span><span>BARCELONA / ES</span><span>studio@orven.example</span></section>
+      <section className="contact-aside section-pad"><span>PROJECT ENQUIRIES</span><span>COLLABORATIONS</span><span>studio@orven.example</span></section>
     </main>
     <Footer/>
   </>;

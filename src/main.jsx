@@ -7,13 +7,14 @@ const projects = [
     id: "house-nera",
     number: "01",
     title: "HOUSE NERA",
-    city: "Baku",
-    country: "Azerbaijan",
+    city: "Private Site",
+    country: "",
     type: "Residential",
     year: "2026",
     area: "480 m²",
     status: "Concept / Private Residence",
     palette: "Limestone / Oak / Raw concrete",
+    conceptTags: ["Threshold", "Filtered light", "Privacy", "Courtyard"],
     hero: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=88",
     images: [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=88",
@@ -36,6 +37,7 @@ const projects = [
     area: "315 m²",
     status: "Completed",
     palette: "Terracotta / Plaster / Olive",
+    conceptTags: ["Courtyard", "Memory", "Warm mass", "Planting"],
     hero: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=2200&q=88",
     images: [
       "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=2200&q=88",
@@ -58,6 +60,7 @@ const projects = [
     area: "260 m²",
     status: "In Development",
     palette: "White stone / Limewash / Sea glass",
+    conceptTags: ["Horizon", "Cross breeze", "Stone", "Daylight"],
     hero: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2200&q=88",
     images: [
       "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2200&q=88",
@@ -80,6 +83,7 @@ const projects = [
     area: "2,100 m²",
     status: "Competition",
     palette: "Dark concrete / Steel / Northern light",
+    conceptTags: ["Mass", "Compression", "Gallery light", "Void"],
     hero: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=2200&q=88",
     images: [
       "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=2200&q=88",
@@ -102,6 +106,7 @@ const projects = [
     area: "620 m²",
     status: "Concept",
     palette: "Desert stone / Water / Bronze glass",
+    conceptTags: ["Shade", "Water", "Microclimate", "Courtyard"],
     hero: "https://images.unsplash.com/photo-1600585152915-d208bec867a1?auto=format&fit=crop&w=2200&q=88",
     images: [
       "https://images.unsplash.com/photo-1600585152915-d208bec867a1?auto=format&fit=crop&w=2200&q=88",
@@ -202,6 +207,87 @@ function MixedProjectTitle({ title }) {
   );
 }
 
+function projectLocation(project) {
+  return project.country ? `${project.city}, ${project.country}` : project.city;
+}
+
+function HeroStatementSwitcher() {
+  const statements = [
+    ["Formed by place.", "Defined by proportion."],
+    ["Light as structure.", "Material as atmosphere."],
+    ["Quiet in gesture.", "Precise in detail."]
+  ];
+  const [index, setIndex] = useState(0);
+  const change = direction => {
+    setIndex(current => (current + direction + statements.length) % statements.length);
+  };
+  return (
+    <div className="hero-switcher">
+      <div className="hero-switch-copy" key={index}>
+        <p>{statements[index][0]}<br/>{statements[index][1]}</p>
+      </div>
+      <div className="hero-switch-controls" aria-label="Change hero statement">
+        <span>{String(index + 1).padStart(2,"0")} / {String(statements.length).padStart(2,"0")}</span>
+        <button onClick={() => change(-1)} aria-label="Previous statement">←</button>
+        <button onClick={() => change(1)} aria-label="Next statement">→</button>
+      </div>
+    </div>
+  );
+}
+
+function PlanBoard({ project }) {
+  const index = Math.max(0, projects.findIndex(p => p.id === project.id));
+  const shifts = [0, 16, 30, 44, 58];
+  const shift = shifts[index] || 0;
+  return (
+    <div className="plan-board">
+      <div className="plan-toolbar">
+        <span>PLAN / {project.number}</span>
+        <span>N ↑</span>
+        <span>1:100</span>
+      </div>
+      <div className="plan-canvas">
+        <svg viewBox="0 0 920 520" role="img" aria-label={project.title + " conceptual floor plan"}>
+          <g className="plan-grid">
+            {[120,240,360,480,600,720,840].map(x => <line key={"x"+x} x1={x} y1="32" x2={x} y2="488"/>)}
+            {[100,180,260,340,420].map(y => <line key={"y"+y} x1="36" y1={y} x2="884" y2={y}/>)}
+          </g>
+          <g className="plan-mass" transform={`translate(${shift} 0)`}>
+            <path d="M112 92 H748 V184 H818 V426 H542 V378 H350 V442 H112 Z"/>
+            <rect x="248" y="188" width="222" height="150" className="plan-court"/>
+            <rect x="494" y="208" width="236" height="110" className="plan-room"/>
+            <rect x="494" y="336" width="138" height="72" className="plan-room"/>
+            <rect x="650" y="336" width="96" height="72" className="plan-room"/>
+            <line x1="112" y1="184" x2="248" y2="184"/>
+            <line x1="470" y1="184" x2="748" y2="184"/>
+            <line x1="350" y1="338" x2="350" y2="442"/>
+            <line x1="470" y1="188" x2="470" y2="338"/>
+            <line x1="494" y1="318" x2="730" y2="318"/>
+          </g>
+          <g className="plan-labels">
+            <text x="142" y="408">01 / ENTRY</text>
+            <text x={320 + shift} y="270">02 / COURT</text>
+            <text x={548 + shift} y="264">03 / LIVING</text>
+            <text x={674 + shift} y="382">04 / PRIVATE</text>
+          </g>
+          <g className="plan-dims">
+            <line x1="112" y1="62" x2={748+shift} y2="62"/>
+            <line x1="112" y1="56" x2="112" y2="68"/>
+            <line x1={748+shift} y1="56" x2={748+shift} y2="68"/>
+            <text x={390 + shift/2} y="52">18.40 M</text>
+          </g>
+        </svg>
+      </div>
+      <div className="plan-legend">
+        <div><span>01</span><b>Arrival</b><small>compressed threshold</small></div>
+        <div><span>02</span><b>Open core</b><small>light / air / planting</small></div>
+        <div><span>03</span><b>Shared zone</b><small>long views</small></div>
+        <div><span>04</span><b>Private zone</b><small>quiet edge</small></div>
+      </div>
+    </div>
+  );
+}
+
 function ProjectAtlas() {
   const [active, setActive] = useState(projects[0]);
   const [mode, setMode] = useState("index");
@@ -291,7 +377,7 @@ function FeaturedCaseStudy() {
           <h3><MixedProjectTitle title={p.title} /></h3>
           <span className="featured-coord">GRID A—03 / ELEV. +0.00</span>
         </div>
-        <p>{p.city}, {p.country}<br/>{p.status}<br/>{p.area}<br/>{p.year}</p>
+        <p>{projectLocation(p)}<br/>{p.status}<br/>{p.area}<br/>{p.year}</p>
         <div className="sequence-labels">
           {labels.map((l,i)=><span className={active===i?"active":""} key={l}>{String(i+1).padStart(2,"0")} {l}</span>)}
         </div>
@@ -299,7 +385,7 @@ function FeaturedCaseStudy() {
       </div>
       <div className="featured-images">
         {p.images.slice(0,5).map((img,i)=>(
-          <figure key={img} ref={el=>refs.current[i]=el} data-index={i} className="case-image reveal" data-reveal>
+          <figure key={img} ref={el=>refs.current[i]=el} data-index={i} className="case-image reveal reveal-mask" data-reveal>
             <img src={img} alt={p.title + " " + labels[i]} loading="lazy" />
             <figcaption>{String(i+1).padStart(2,"0")} / {labels[i]}</figcaption>
           </figure>
@@ -415,7 +501,7 @@ function Home() {
             <div className="hero-topline"><span>ARCHITECTURE / INTERIORS</span><span>2022—2026</span></div>
             <h1>ORVEN</h1>
             <div className="hero-statement">
-              <p>Formed by place.<br/>Defined by proportion.</p>
+              <HeroStatementSwitcher />
               <span>INDEPENDENT PRACTICE</span>
             </div>
             <div className="scroll-mark">SCROLL <span>↓</span> / 01</div>
@@ -512,41 +598,53 @@ function ProjectPage({ project }) {
           <div className="project-hero-copy">
             <span>{project.number} / {project.type.toUpperCase()}</span>
             <h1 className="project-display"><MixedProjectTitle title={project.title} /></h1>
-            <div><span>{project.city}, {project.country}</span><span>{project.year}</span></div>
+            <div><span>{projectLocation(project)}</span><span>{project.year}</span></div>
           </div>
         </section>
 
         <section className="project-facts section-pad">
           <div className="facts-grid">
-            <span>LOCATION<b>{project.city}, {project.country}</b></span>
+            <span>LOCATION<b>{projectLocation(project)}</b></span>
             <span>TYPOLOGY<b>{project.type}</b></span>
             <span>AREA<b>{project.area}</b></span>
             <span>YEAR<b>{project.year}</b></span>
             <span>STATUS<b>{project.status}</b></span>
             <span>MATERIAL<b>{project.palette}</b></span>
           </div>
-          <Reveal><p className="project-intro">{project.intro}</p></Reveal>
+          <div className="project-intro-wrap">
+            <span className="intro-label">01 / PROJECT INTENT</span>
+            <Reveal><p className="project-intro">{project.intro}</p></Reveal>
+            <div className="project-keywords">
+              {project.conceptTags.map((tag,i)=><span key={tag}>{String(i+1).padStart(2,"0")} {tag}</span>)}
+            </div>
+          </div>
         </section>
 
-        <section className="full-image reveal" data-reveal><img src={project.images[1]} alt={project.title + " context"}/></section>
+        <section className="full-image reveal reveal-scale" data-reveal><img src={project.images[1]} alt={project.title + " context"}/></section>
 
         <section className="concept section-pad">
-          <div className="section-kicker"><span>02</span><span>CONCEPT</span></div>
-          <Reveal><p>{project.concept}</p></Reveal>
+          <div className="section-kicker"><span>02</span><span>CONCEPT / STRATEGY</span></div>
+          <div className="concept-layout">
+            <div className="concept-index">
+              {project.conceptTags.map((tag,i)=><span key={tag}><b>{String(i+1).padStart(2,"0")}</b>{tag}</span>)}
+            </div>
+            <Reveal className="concept-copy"><p>{project.concept}</p></Reveal>
+            <aside className="concept-note">
+              <span>A—02</span>
+              <p>One spatial move, resolved through climate, proportion and material restraint.</p>
+            </aside>
+          </div>
         </section>
 
         <section className="image-duo section-pad">
-          <figure className="reveal" data-reveal><img src={project.images[2]} alt={project.title + " interior"}/><figcaption>INTERIOR / 01</figcaption></figure>
-          <figure className="reveal" data-reveal><img src={project.images[3]} alt={project.title + " detail"}/><figcaption>DETAIL / 02</figcaption></figure>
+          <figure className="reveal reveal-left" data-reveal><img src={project.images[2]} alt={project.title + " interior"}/><figcaption>INTERIOR / 01</figcaption></figure>
+          <figure className="reveal reveal-right" data-reveal><img src={project.images[3]} alt={project.title + " detail"}/><figcaption>DETAIL / 02</figcaption></figure>
         </section>
 
         <section className="drawing-section section-pad">
-          <div className="section-kicker"><span>03</span><span>PLAN / LOGIC</span></div>
-          <div className="diagram">
-            <span>ENTRY</span><span>COURTYARD</span><span>LIVING</span><span>PRIVATE</span>
-            <i></i><i></i><i></i>
-          </div>
-          <p>A compact diagram showing the project as a sequence of thresholds, open space and controlled views rather than isolated rooms.</p>
+          <div className="section-kicker"><span>03</span><span>PLAN / SPATIAL LOGIC</span></div>
+          <PlanBoard project={project} />
+          <p className="drawing-copy">The plan is read as a sequence of thresholds: arrival, open core, shared rooms and a protected private edge. The diagram is intentionally schematic, focusing on movement, light and spatial hierarchy.</p>
         </section>
 
         <section className="before-after section-pad">
@@ -581,7 +679,7 @@ function StudioPage() {
         <Reveal className="clip-title"><h1 className="mixed-title page-title studio-title"><span>WE BUILD</span><em>from the</em><span>INSIDE OUT.</span></h1></Reveal>
         <p>ORVEN works across architecture and interiors, treating material, movement and natural light as one continuous problem.</p>
       </section>
-      <section className="full-image reveal" data-reveal><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=88" alt="Studio"/></section>
+      <section className="full-image reveal reveal-scale" data-reveal><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=88" alt="Studio"/></section>
       <section className="studio-manifesto section-pad">
         <p>We are interested in buildings that become quieter with time. Our work avoids stylistic signatures in favor of proportion, legibility and atmosphere.</p>
         <div className="stats large"><span><b>05</b>Cities</span><span><b>27</b>Projects</span><span><b>11</b>Collaborators</span><span><b>04</b>Countries</span></div>

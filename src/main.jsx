@@ -409,7 +409,7 @@ function MaterialStudy() {
     <section className="materials section-pad">
       <span className="vertical-tag">MATERIAL / 05</span>
       <div className="section-kicker"><span>05</span><span>MATERIAL STUDY</span></div>
-      <div className="materials-layout">
+      <div className="materials-layout material-drop" data-reveal>
         <div className="materials-list">
           {materials.map((m,i)=>(
             <button key={m.name} className={active===i?"active":""} onMouseEnter={()=>setActive(i)} onClick={()=>setActive(i)}>
@@ -440,7 +440,7 @@ function ProcessBlock() {
     <section className="process-block section-pad">
       <div className="process-ruler" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
       <div className="section-kicker"><span>06</span><span>METHOD / PROCESS</span></div>
-      <div className="process-layout">
+      <div className="process-layout process-slide" data-reveal>
         <div className="process-list">
           {process.map((step,i)=>(
             <button key={step[1]} className={active===i?"active":""} onClick={()=>setActive(i)} onMouseEnter={()=>setActive(i)}>

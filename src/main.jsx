@@ -385,9 +385,17 @@ function FeaturedCaseStudy() {
       </div>
       <div className="featured-images">
         {p.images.slice(0,5).map((img,i)=>(
-          <figure key={img} ref={el=>refs.current[i]=el} data-index={i} className="case-image reveal reveal-mask" data-reveal>
-            <img src={img} alt={p.title + " " + labels[i]} loading="lazy" />
-            <figcaption>{String(i+1).padStart(2,"0")} / {labels[i]}</figcaption>
+          <figure
+            key={img}
+            ref={el=>refs.current[i]=el}
+            data-index={i}
+            className={"case-image case-image-" + (i + 1)}
+          >
+            <div className="case-image-frame">
+              <img src={img} alt={p.title + " " + labels[i]} loading={i === 0 ? "eager" : "lazy"} />
+              <span className="case-image-index">{String(i+1).padStart(2,"0")}</span>
+            </div>
+            <figcaption><span>{labels[i]}</span><span>{p.title}</span></figcaption>
           </figure>
         ))}
       </div>

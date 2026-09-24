@@ -609,8 +609,8 @@ footer strong{letter-spacing:.18em}footer span{font:400 9px IBM Plex Mono,monosp
 
 .process-slide{
   opacity:0;
-  transform:translateX(72px);
-  clip-path:inset(0 0 0 20%);
+  transform:translateX(-72px);
+  clip-path:inset(0 20% 0 0);
   transition:
     opacity .6s var(--ease),
     transform .9s var(--ease),
@@ -623,7 +623,7 @@ footer strong{letter-spacing:.18em}footer span{font:400 9px IBM Plex Mono,monosp
 }
 .process-slide .process-list button{
   opacity:0;
-  transform:translateX(28px);
+  transform:translateX(-28px);
 }
 .process-slide.is-visible .process-list button{
   opacity:1;
@@ -639,7 +639,7 @@ footer strong{letter-spacing:.18em}footer span{font:400 9px IBM Plex Mono,monosp
 .process-slide.is-visible .process-list button:nth-child(4){transition-delay:.29s}
 .process-slide .process-visual{
   opacity:0;
-  transform:translateX(34px);
+  transform:translateX(-34px);
 }
 .process-slide.is-visible .process-visual{
   opacity:1;

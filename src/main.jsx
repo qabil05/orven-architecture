@@ -314,30 +314,52 @@ function ProjectAtlas() {
       </div>
 
       {mode === "index" ? (
-        <div className="atlas-index">
-          <div className="atlas-list">
-            {projects.map(p => (
-              <button
-                key={p.id}
-                className={"project-row " + (active.id === p.id ? "active" : "")}
-                onMouseEnter={() => setActive(p)}
-                onFocus={() => setActive(p)}
-                onClick={() => go("#/project/" + p.id)}
-              >
-                <span>{p.number}</span>
-                <strong>{p.title}</strong>
-                <span>{p.city}</span>
-                <span>{p.type}</span>
-                <span>{p.year}</span>
-                <i>↗</i>
+        <div className="atlas-index atlas-index-editorial">
+          <div className="atlas-editorial-panel">
+            <div className="atlas-active-head">
+              <span className="atlas-active-number">{active.number}</span>
+              <span className="atlas-active-label">CURRENT SELECTION / {active.year}</span>
+            </div>
+
+            <div className="atlas-active-copy" key={active.id}>
+              <h3><MixedProjectTitle title={active.title} /></h3>
+              <div className="atlas-active-meta">
+                <span>LOCATION<b>{projectLocation(active)}</b></span>
+                <span>TYPE<b>{active.type}</b></span>
+                <span>AREA<b>{active.area}</b></span>
+              </div>
+              <button className="atlas-open" onClick={() => go("#/project/" + active.id)}>
+                OPEN PROJECT <span>↗</span>
               </button>
-            ))}
+            </div>
+
+            <div className="atlas-rail" role="list" aria-label="Selected projects">
+              {projects.map(p => (
+                <button
+                  key={p.id}
+                  className={active.id === p.id ? "active" : ""}
+                  onMouseEnter={() => setActive(p)}
+                  onFocus={() => setActive(p)}
+                  onClick={() => setActive(p)}
+                >
+                  <span>{p.number}</span>
+                  <strong>{p.title}</strong>
+                  <i>{p.year}</i>
+                </button>
+              ))}
+            </div>
           </div>
-          <button className="atlas-preview" onClick={() => go("#/project/" + active.id)} aria-label={"View " + active.title}>
+
+          <button className="atlas-stage" onClick={() => go("#/project/" + active.id)} aria-label={"View " + active.title}>
             {projects.map(p => (
               <img key={p.id} className={active.id === p.id ? "active" : ""} src={p.hero} alt={p.title} />
             ))}
-            <span className="preview-caption">{active.number} / {active.title}</span>
+            <span className="atlas-stage-grid" aria-hidden="true"></span>
+            <div className="atlas-stage-caption">
+              <span>{active.number} / {active.type.toUpperCase()}</span>
+              <strong>{active.title}</strong>
+              <span>{projectLocation(active)} / {active.year}</span>
+            </div>
           </button>
         </div>
       ) : (
@@ -488,13 +510,25 @@ function ContactBlock() {
 
 function Footer() {
   return (
-    <footer>
-      <strong>ORVEN</strong>
-      <span>ARCHITECTURE / INTERIORS</span>
-      <span>INDEPENDENT DESIGN STUDIO</span>
-      <span>© 2026</span>
-      <span className="template-note">CONCEPT WEBSITE — CREATED AS A DESIGN TEMPLATE. ORVEN IS A FICTIONAL STUDIO.</span>
-    </footer>
+    <>
+      <section className="portfolio-disclaimer" aria-label="Portfolio concept notice">
+        <div className="portfolio-disclaimer-kicker">
+          <span>PORTFOLIO / CONCEPT</span>
+          <span>FICTIONAL STUDIO</span>
+        </div>
+        <div className="portfolio-disclaimer-main">
+          <strong>THIS WEBSITE IS A<br/>DESIGN TEMPLATE.</strong>
+          <p>ORVEN is a fictional architecture studio created solely as a portfolio concept. It does not represent a real company, practice or commercial service.</p>
+        </div>
+      </section>
+      <footer>
+        <strong>ORVEN</strong>
+        <span>ARCHITECTURE / INTERIORS</span>
+        <span>INDEPENDENT DESIGN STUDIO</span>
+        <span>© 2026</span>
+        <span className="template-note">PORTFOLIO CONCEPT / DESIGN TEMPLATE / FICTIONAL STUDIO</span>
+      </footer>
+    </>
   );
 }
 
